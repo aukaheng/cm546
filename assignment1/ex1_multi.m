@@ -120,6 +120,16 @@ fprintf('\n\n');
 %                       it does not need to be normalized.
 
 price = 0;  % You need to implement the price
+x = [1650, 3];
+norm_x = (x - mu) ./ sigma;
+
+%fprintf('Size of norm_x:\n');
+%disp(size(norm_x));
+%fprintf('Size of theta:\n');
+%disp(size(theta));
+
+price = [1, norm_x] * theta;
+
 
 % ======================================================
 
@@ -164,6 +174,10 @@ fprintf('\n\n');
 
 price =  0;  % You need to implement the price
 
+%fprintf('Size of theta:\n');
+%disp(size(theta));
+x = [1650, 3];
+price = [1, x] * theta;
 
 % ============================================================
 
