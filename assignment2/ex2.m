@@ -25,6 +25,7 @@ data = load('ex2data.txt');
 X = data(:, [1, 2]);
 y = data(:, 3);
 
+
 %% ==================== Part 1: Plotting ====================
 %  We start the assignment by first plotting the data to understand 
 %  the problem we are working with. You need to complete the code
