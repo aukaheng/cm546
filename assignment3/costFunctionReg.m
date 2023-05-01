@@ -19,8 +19,17 @@ grad = zeros(size(theta));
 %               partial derivatives of the cost with respect to each
 %               parameter in theta.
 
+% Bias theta should not be regularized
+theta1 = 0;
+theta_reg = [theta1; theta(2:end, :)];
 
+h = sigmoid(X * theta);
 
+regTerm = lambda / (2 * m) * (theta_reg' * theta_reg);
+
+J = (1 / m) * ((-y' * log(h) - (1 - y)' * log(1 - h)) + regTerm);
+
+grad = (1 / m) * ((X' * (h - y)) + (lambda * theta_reg));
 
 
 

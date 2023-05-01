@@ -52,6 +52,7 @@ fprintf('Number of Features, including the Bias (Intercept) Term\n');
 % "+1" to include X0 in the counting
 fprintf('  Before Polynomial Expansion : %2d\n', size(X, 2) + 1);
 % mapFeature will add the intercept term for you
+%%%% Increasing the degress, will generate more features(X), which can yield a higher accuracy 
 X = mapFeature(X(:,1), X(:,2));
 fprintf('  After  Polynomial Expansion : %2d\n', size(X, 2));
 
@@ -88,6 +89,7 @@ pause;
 initial_theta = zeros(size(X, 2), 1);
 
 % Set regularization parameter lambda to 1 (you should vary this)
+%%%% Decreasing the lambda can yield a higher accuracy
 lambda = 1;  % Try 0, 1, 10, 100
 
 % Set Options
@@ -134,6 +136,10 @@ X1 = 0;     % You should implement X1
 X2 = 0;     % You should implement X2
 X_map = 0;  % You should implement X_map
 
+X1 = -0.13882;
+X2 = -0.27266;
+X_map = mapFeature(X1, X2);
+
 fprintf('\nPredict\nY = ');
 disp(predict(theta, X_map))
 
@@ -159,6 +165,11 @@ fprintf('    0.18376,  0.93348\n');
 X1 = 0;     % You should implement X1
 X2 = 0;     % You should implement X2
 X_map = 0;  % You should implement X_map
+
+X = [-0.21947, -0.01681; -0.13882, -0.27266; 0.18376, 0.93348];
+X1 = X(:, 1);
+X2 = X(:, 2);
+X_map = mapFeature(X1, X2);
 
 fprintf('\nPredict\nY =\n');
 disp(predict(theta, X_map))
