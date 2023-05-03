@@ -20,6 +20,8 @@ axis image off
 % Convert integer to double
 Example = double(image(:));
 
+% disp(size(Example));
+
 % Load Weights (Theta1 & Theta2) from MAT file
 load('ex4weights.mat');
 
@@ -30,10 +32,8 @@ load('ex4weights.mat');
 
 
 % Predict the number
-pred = 0;  % Replace the zero with your code
-
-
-
+% Example is 400x1
+pred = predict(Theta1, Theta2, Example');
 
 
 % =========================================================================

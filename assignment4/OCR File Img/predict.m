@@ -20,12 +20,19 @@ p = zeros(size(image, 1), 1);
 %       you can use max(A, [], 2) to obtain the max for each row.
 %
 
-X1 =   % Need implementation
-X2 =   % Need implementation
-X3 =   % Need implementation
+m = size(image, 1);
 
-% =========================================================================
+% bias unit x0
+x0 = ones(m, 1);
+X1 = [x0, image];
 
-[maxVal, p] = max(X3, [], 2);  % maxVal is not used but need to be declared
+A2 = sigmoid(X1 * Theta1');
+
+% bias unit a(2)0
+A2 = [ones(size(A2, 1), 1), A2];
+
+h = sigmoid(A2 * Theta2');
+
+[maxVal, p] = max(h, [], 2);
 
 end
