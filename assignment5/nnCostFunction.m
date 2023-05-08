@@ -43,12 +43,30 @@ Theta2_grad = zeros(size(Theta2));
 %               used with the neural network cost function.      
 %
 
+a1 = [ones(m, 1) X];
 
+z2 = a1 * Theta1';
+a2 = sigmoid(z2);
+a2 = [ones(m, 1), a2];
 
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
 
+h = a3;
 
+% one-hot encoded the y
+K = size(Theta2, 1);
+Y = zeros(m, K);
+indices = sub2ind(size(Y), 1:m, y');
+Y(indices) = 1;
 
+J = ones(1, m) * (((-Y .* log(h)) - ((1 - Y) .* log(1 - h))) * ones(K, 1)) / m;
 
+penalty = sum(sum(Theta1(:, 2:end) .^ 2, 2)) + sum(sum(Theta2(:, 2:end) .^ 2, 2));
+
+regularizedTerm = (lambda / (2 * m)) * penalty;
+
+J = J + regularizedTerm;
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives
@@ -66,11 +84,16 @@ Theta2_grad = zeros(size(Theta2));
 %               first time.
 %
 
+sigma3 = h - Y;
+bias = ones(size(z2, 1), 1);
+sigma2 = (sigma3 * Theta2) .* sigmoidGradient([bias z2]);
+sigma2 = sigma2(:, 2:end);
 
+delta1 = sigma2' * a1;
+delta2 = sigma3' * a2;
 
-
-
-
+Theta1_grad = delta1 / m;
+Theta2_grad = delta2 / m;
 
 
 % Part 3: Implement regularization with the cost function and gradients.
@@ -81,10 +104,11 @@ Theta2_grad = zeros(size(Theta2));
 %               from Part 2.
 %
 
+p1 = (lambda / m) * [zeros(size(Theta1, 1), 1) Theta1(:, 2:end)];
+p2 = (lambda / m) * [zeros(size(Theta2, 1), 1) Theta2(:, 2:end)];
 
-
-
-
+Theta1_grad = Theta1_grad + p1;
+Theta2_grad = Theta2_grad + p2;
 
 
 
