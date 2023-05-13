@@ -51,26 +51,34 @@ error_val   = zeros(m, 1);
 
 % -------------------------- Sample Solution --------------------------
 
+% for i = 1:m
+%   X_train = X(1:i, :);
+%   y_train = y(1:i);
+
+%   theta = trainLinearReg(X_train, y_train, lambda);
+
+%   pred     = X     * theta;
+%   pred_val = X_val * theta;
+
+%   error_train(i) = 1 / (2 * i) * sum((pred(1:i) - y_train) .^2);
+%   error_val(i)   = 1 / (2 * size(X_val, 1)) * sum((pred_val - y_val) .^2);
+% end
+
+% -------------------------- Your Solution ----------------------------
+% Try using linearRegCostFunction for error_train(i) and error_val(i).
+
 for i = 1:m
   X_train = X(1:i, :);
   y_train = y(1:i);
 
   theta = trainLinearReg(X_train, y_train, lambda);
 
-  pred     = X     * theta;
+  pred = X * theta;
   pred_val = X_val * theta;
 
-  error_train(i) = 1 / (2 * i) * sum((pred(1:i) - y_train) .^2);
-  error_val(i)   = 1 / (2 * size(X_val, 1)) * sum((pred_val - y_val) .^2);
+  error_train(i) = linearRegCostFunction(X_train, y_train, theta, lambda);
+  error_val(i) = linearRegCostFunction(X_val, y_val, theta, lambda);
 end
-
-% -------------------------- Your Solution ----------------------------
-% Try using linearRegCostFunction for error_train(i) and error_val(i).
-
-
-
-
-
 
 % =========================================================================
 
