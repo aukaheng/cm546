@@ -40,10 +40,10 @@ for i = 1:size(C_opt, 2)
     fprintf('    (j:%d) Sigma  = %5.2f', j, sigma);
     fprintf('    CV Err = %.3f\n\n', error_cv(i, j));
 
-    if (error_cv < minimumError)
+    if (error_cv(i, j) < minimumError)
       optimalC = C;
       optimalSigma = sigma;
-      minimumError = error_cv;
+      minimumError = error_cv(i, j);
     endif
 
   end

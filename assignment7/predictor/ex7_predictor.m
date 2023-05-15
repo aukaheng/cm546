@@ -24,9 +24,9 @@ do
 % ====================== YOUR CODE HERE =======================
 
 		% Prediction
-		word_indices =     % complete with your code
-		X            =     % complete with your code
-		prediction   =     % complete with your code
+		word_indices = processEmail(file_content);
+		X            = emailFeatures(word_indices);
+		prediction   = svmPredict(modelLinearKernel, X);
 
 % =============================================================
 	

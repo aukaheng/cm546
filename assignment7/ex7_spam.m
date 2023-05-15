@@ -138,17 +138,17 @@ fprintf('\nProcessed %s\n\nSpam Classification: %d\n', filename, p);
 fprintf('(1 indicates spam, 0 indicates not spam)\n\n');
 
 %% Model building
-%  modelLinearKernel.b              = model.b;
-%  modelLinearKernel.w              = model.w;
-%  modelLinearKernel.alphas         = model.alphas;   % can exclude
-%  modelLinearKernel.kernelFunction = @linearKernel;  % can exclude
+modelLinearKernel.b              = model.b;
+modelLinearKernel.w              = model.w;
+modelLinearKernel.alphas         = model.alphas;   % can exclude
+ modelLinearKernel.kernelFunction = @linearKernel;  % can exclude
 %
 %  Note: You can remove alphas and kernelFunction
 %        from the Model and modify the svmPredict.m
 %        to provide only the Linear Kernel function.
 %
 %% Save the Model for future use
-%  save .\predictor\model.mat modelLinearKernel
+save .\predictor\model.mat modelLinearKernel
 %
 %% Displaying the structure of the Model
-%  fieldnames( modelLinearKernel )
+fieldnames( modelLinearKernel )
