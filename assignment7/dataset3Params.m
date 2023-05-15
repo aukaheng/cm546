@@ -15,6 +15,10 @@ C_opt     = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
 sigma_opt = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
 error_cv  = zeros(size(C_opt, 2), size(sigma_opt, 2));
 
+minimumError = 1;
+optimalC = 1;
+optimalSigma = 1;
+
 for i = 1:size(C_opt, 2)
   for j = 1:size(sigma_opt, 2)
 
@@ -32,9 +36,15 @@ for i = 1:size(C_opt, 2)
 		
     %% Uncomment the 3 lines with fprintf to display:
     %% C, sigma, and cross validation error
-    % fprintf('    (i:%d) C      = %5.2f\n', i, C);
-    % fprintf('    (j:%d) Sigma  = %5.2f', j, sigma);
-    % fprintf('    CV Err = %.3f\n\n', error_cv(i, j));
+    fprintf('    (i:%d) C      = %5.2f\n', i, C);
+    fprintf('    (j:%d) Sigma  = %5.2f', j, sigma);
+    fprintf('    CV Err = %.3f\n\n', error_cv(i, j));
+
+    if (error_cv < minimumError)
+      optimalC = C;
+      optimalSigma = sigma;
+      minimumError = error_cv;
+    endif
 
   end
 end
@@ -45,8 +55,8 @@ end
 %               cross validation set.
 %
 
-
-
+C = optimalC;
+sigma = optimalSigma;
 
 % =========================================================================
 
