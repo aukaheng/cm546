@@ -13,12 +13,9 @@ centroids = zeros(K, size(X, 2));
 %               the dataset X
 %
 
+randomlyPickedRows = randperm(size(X, 1), K);
 
-
-
-
-
-
+centroids = X(randomlyPickedRows, :);
 
 % =============================================================
 

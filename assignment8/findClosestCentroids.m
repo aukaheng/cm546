@@ -21,11 +21,24 @@ idx = zeros(size(X, 1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+m = size(X, 1);
 
+% For every example
+for i = 1:m
+  xi = X(i, :);
+  distances = zeros(K, 1);
 
+  % Compare it with every centroid
+  for j = 1:K
+    muj = centroids(j, :);
+    distances(j) = norm(xi - muj) ^ 2;
+  end
 
+  % https://docs.octave.org/v4.0.3/Utility-Functions.html#XREFmin
+  [minimumValue, ci] = min(distances);
 
-
+  idx(i) = ci;
+end
 
 % =============================================================
 

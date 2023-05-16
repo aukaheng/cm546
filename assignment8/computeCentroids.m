@@ -26,12 +26,21 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
+for k = 1:K
+  % A m x 1 vector, with 1 and 0
+  filters = idx == k;
 
+  % https://docs.octave.org/interpreter/Special-Utility-Matrices.html#XREFrepmat
+  % Make it the same size as X
+  filters = repmat(filters, 1, n);
 
+  % Count occurance of k in idx
+  Ck = sum(idx(:) == k);
 
+  muk = sum(X .* filters) / Ck;
 
-
-
+  centroids(k, :) = muk;
+end
 
 % =============================================================
 
