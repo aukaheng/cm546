@@ -41,8 +41,15 @@ for i = 1:length(lambda_vec)
 
     theta = trainLinearReg(X, y, lambda);
 
-    error_train(i) = linearRegCostFunction(X, y, theta, lambda);
-    error_val(i) = linearRegCostFunction(Xval, yval, theta, lambda);
+    % After finding the "best" theta,
+    % we shall use this theta for prediction.
+    % From then on, the mission for lambda is done,
+    % don't include it in further calculation,
+    % otherwise will occur an underfit.
+    no_lambda = 0;
+
+    error_train(i) = linearRegCostFunction(X, y, theta, no_lambda);
+    error_val(i) = linearRegCostFunction(Xval, yval, theta, no_lambda);
 end
 
 % =========================================================================
