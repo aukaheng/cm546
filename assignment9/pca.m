@@ -20,6 +20,13 @@ S = zeros(n);
 %       number of examples).
 %
 
+% X has already been normalized.
+% Covariance matrix
+SIGMA = (X' * X) / m;
+
+% U: principal components
+% S: diagonal matrix
+[U, S, V] = svd(SIGMA);
 
 
 

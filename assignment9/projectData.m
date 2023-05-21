@@ -18,8 +18,11 @@ Z = zeros(size(X, 1), K);
 %                    projection_k = x' * U(:, k);
 %
 
+U_reduce = U(:, 1:K);
 
-
+% 50 x 2 * 2 x 1
+% X with size of 50 x 2 is now projected to Z with size of 50 x 1;
+Z = X * U_reduce;
 
 % =============================================================
 

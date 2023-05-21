@@ -25,6 +25,8 @@ fprintf('Visualizing example dataset for PCA.\n\n');
 %  variable X in your environment
 load ('ex9data.mat');
 
+% X is 50 examples and 2 features
+
 %  Visualize the example dataset
 plot(X(:, 1), X(:, 2), 'bo');
 axis([0.5 6.5 2 8]);
@@ -86,6 +88,16 @@ fprintf('\n(this value should be about 1.481274)\n\n');
 X_rec  = recoverData(Z, U, K);
 fprintf('Approximation of the first example: %f %f\n', X_rec(1, 1), X_rec(1, 2));
 fprintf('\n(this value should be about  -1.047419 -1.047419)\n\n');
+
+% This is how the X has evolved.
+% disp(X(1:10, :));
+% pause;
+% disp(X_norm(1:10, :));
+% pause;
+% disp(Z(1:10, :));
+% pause;
+% disp(X_rec(1:10, :));
+% pause;
 
 %  Draw lines connecting the projected points to the original points
 hold on;
