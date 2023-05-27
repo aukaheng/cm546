@@ -26,17 +26,18 @@ for epsilon = min(pval):stepsize:max(pval)
     % Note: You can use predictions = (pval < epsilon) to get a 
     %       binary vector of 0's and 1's of the outlier predictions.
 
+    crossValidationPredictions = (pval < epsilon);
 
+    truePositive = sum((crossValidationPredictions == 1) & (yval == 1));
 
+    falsePositive = sum((crossValidationPredictions == 1) & (yval == 0));
 
+    falseNegative = sum((crossValidationPredictions == 0) & (yval == 1));
 
+    precision = truePositive / (truePositive + falsePositive);
+    recall = truePositive / (truePositive + falseNegative);
 
-
-
-
-
-
-
+    F1 = (2 * precision * recall) / (precision + recall);
 
     % =============================================================
 	warning("on","Octave:divide-by-zero")
