@@ -39,20 +39,36 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+% Only accumulate cost for user j and movie i only if he/she has rated, which is R(i, j) = 1.
+% Theta is 4x3
+% X is 5x3
+% We need a 5x4 to subtract Y.
+% Y is 5x4
+% Use R as a filter, we shall be using bitwise operation.
+filtered = (X * Theta' - Y) .* R;
 
+% Call sum two times to get a scalar value in octave.
+% Required to be a bitwise operation.
+J = (1 / 2) * sum(sum(filtered .^ 2));
 
+X_grad = filtered * Theta;
 
+% Theta is 4x3
+% filtered is 5x4
+% X is 5x3
+Theta_grad = filtered' * X;
 
+%
+% Regularization
+%
+costRegularizedTerm = ((lambda / 2) * (sum(sum(Theta .^ 2)))) + ((lambda / 2) * (sum(sum(X .^ 2))));
+J = J + costRegularizedTerm;
 
+gradientXRegularizedTerm = lambda * X;
+X_grad = X_grad + gradientXRegularizedTerm;
 
-
-
-
-
-
-
-
-
+gradientThetaRegularizedTerm = lambda * Theta;
+Theta_grad = Theta_grad + gradientThetaRegularizedTerm;
 
 % =============================================================
 
