@@ -54,11 +54,10 @@ a3 = sigmoid(z3);
 
 h = a3;
 
-% one-hot encoded the y
+% one-hot encoded the y into Y
 K = size(Theta2, 1);
 Y = zeros(m, K);
-indices = sub2ind(size(Y), 1:m, y');
-Y(indices) = 1;
+Y = bsxfun(@eq, y, 1:15);
 
 J = ones(1, m) * (((-Y .* log(h)) - ((1 - Y) .* log(1 - h))) * ones(K, 1)) / m;
 

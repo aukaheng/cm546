@@ -1,2 +1,4 @@
 .DS_Store
 octave-workspace
+final/mnist
+final/mnist.mat
