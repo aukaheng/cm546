@@ -1,4 +1,4 @@
-CSV = csvread('mnist/chinese_mnist.csv');
+CSV = csvread('mnist/chinese_mnist_0-10.csv');
 fprintf('\nLoaded the index mapping file.\n');
 
 % Remove the header 1:1
@@ -26,13 +26,12 @@ for i = 1:m
   M = imread(['mnist/data/data/input_', fileName , '.jpg']);
   %fprintf('\nSize of matrix is %s.\n', num2str(size(matrix)));
 
-  % Normalization
-  % https://medium.com/analytics-vidhya/a-tip-a-day-python-tip-8-why-should-we-normalize-image-pixel-values-or-divide-by-255-4608ac5cd26a
+   % https://medium.com/analytics-vidhya/a-tip-a-day-python-tip-8-why-should-we-normalize-image-pixel-values-or-divide-by-255-4608ac5cd26a
   % Pixel values range from 0 to 256, excluding 0
   % imread result is an integer matrix
+  M = double(M);
+  M = M / 255;
   v = M(:);
-  v = double(v);
-  v = v / 255;
   
   % Turn it into a row vector
   % Each row in X represents one image
@@ -44,3 +43,5 @@ endfor;
 %fprintf('\nAll images is unrolled and loaded into a matrix with the size of %s.', num2str(size(images)));
 
 save('-mat', 'final.mat', 'X', 'y');
+
+%imshow(reshape(X(1,:), 64, 64));
