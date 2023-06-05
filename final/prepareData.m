@@ -26,12 +26,18 @@ for i = 1:m
   M = imread(['mnist/data/data/input_', fileName , '.jpg']);
   %fprintf('\nSize of matrix is %s.\n', num2str(size(matrix)));
 
-  % Turn the matrix into a row vector
-  % "reshape" performs a column wise scan, so make sure to first transpose the matrix
-  v = reshape(M', [1, inputLayerSize]);
-  %fprintf('\nSize of vector is %s.\n', num2str(size(vector)));
+  % Normalization
+  % https://medium.com/analytics-vidhya/a-tip-a-day-python-tip-8-why-should-we-normalize-image-pixel-values-or-divide-by-255-4608ac5cd26a
+  % Pixel values range from 0 to 256, excluding 0
+  % imread result is an integer matrix
+  v = M(:);
+  v = double(v);
+  v = v / 255;
+  
+  % Turn it into a row vector
+  % Each row in X represents one image
+  X(i, :) = v';
 
-  X(i, :) = v;
   y(i) = row(4);
 endfor;
 

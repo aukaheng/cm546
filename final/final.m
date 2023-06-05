@@ -1,8 +1,8 @@
-clear ; close all; clc
+clear; close all; clc
 
 % X is 15000 x 4096
 % y is 15000 x 1
-load('mnist.mat');
+load('final.mat');
 
 % Shuffle
 m = size(X, 1);
@@ -20,7 +20,7 @@ y = y_train;
 
 % Define the number of input, hidden, and output layers
 inputLayerSize = 4096;
-hiddenLayerSize = 50;
+hiddenLayerSize = 25;
 outputLayerSize = 15;
 
 initialTheta1 = randInitializeWeights(inputLayerSize, hiddenLayerSize);
@@ -35,10 +35,10 @@ initialParameters = [initialTheta1(:); initialTheta2(:)];
 % Compute the error
 % Backward propagation
 % Repeat the above 3 steps 400 times until the error converges
-options = optimset('MaxIter', 100);
+options = optimset('MaxIter', 50);
 
 % Regularization
-lambda = 0.25;
+lambda = 1;
 
 costFunction = @(p) nnCostFunction(p, inputLayerSize, hiddenLayerSize, outputLayerSize, X, y, lambda);
 
