@@ -57,7 +57,7 @@ h = a3;
 % one-hot encoded the y into Y
 K = size(Theta2, 1);
 Y = zeros(m, K);
-Y = bsxfun(@eq, y, 1:15);
+Y = bsxfun(@eq, y, 1:num_labels);
 
 J = ones(1, m) * (((-Y .* log(h)) - ((1 - Y) .* log(1 - h))) * ones(K, 1)) / m;
 
