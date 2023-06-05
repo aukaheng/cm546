@@ -24,16 +24,24 @@ J_history = zeros(m, 1);
     % Instructions: Perform a single gradient step on the parameter
     %               vector theta.
     %
+    % Pick one x and y to compute the theta
+    xi = X(i, :);
+    yi = y(i);
+
     % The hypothese should be the same as y, which is 1x1
     % X_shuffled is 47x3
     % theta is 3x1
-    hypothesis_i = X(i, :) * theta;
-    theta = theta - alpha * (X(i, :)' * (hypothesis_i - y(i)));
+    hypothese = xi * theta;
+    error = hypothese - yi;
+    gradient = xi' * error;
+    %theta = theta - alpha * gradient;
+    alpha = implicitUpdate(alpha, xi');
+    theta = theta - alpha * gradient;
 		
     % =============================================================
 
     % Save the cost J in every iteration
-    J_history(i) = computeCostMulti(X(i, :), y(i), theta);
+    J_history(i) = computeCostMulti(X, y, theta);
 
   end
 end

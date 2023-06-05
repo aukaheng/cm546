@@ -21,7 +21,9 @@ function alpha = implicitUpdate(alpha, X)
 %               p.3 of the paper "Implicit Online Learning",
 %               K. Brian and B. Peter
 
- 
+% η is the learning rate
+% The X is actually X(i, :)
+alpha = alpha / (1 + alpha * X .^ 2);
 
 
 
