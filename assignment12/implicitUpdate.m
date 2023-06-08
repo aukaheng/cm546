@@ -23,8 +23,7 @@ function alpha = implicitUpdate(alpha, X)
 
 % η is the learning rate
 % The X is actually X(i, :)
-alpha = alpha / (1 + alpha * X .^ 2);
-
-
+% ||x||_2 represents a 2-norm of vector x
+alpha = alpha / (1 + alpha * (norm(X, 2) ^ 2));
 
 % ========================================================== 
