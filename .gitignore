@@ -3,3 +3,4 @@ octave-workspace
 final/mnist/*
 !final/mnist/chinese_mnist_0-10.csv
 final/final.mat
+final/submission.zip
