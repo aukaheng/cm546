@@ -23,7 +23,7 @@ y = y_train;
 
 % Define the number of input, hidden, and output layers
 inputLayerSize = 4096;
-hiddenLayerSize = 100;
+hiddenLayerSize = 50;
 outputLayerSize = 11; % 0 - 10
 
 initialTheta1 = randInitializeWeights(inputLayerSize, hiddenLayerSize);
@@ -38,16 +38,23 @@ initialParameters = [initialTheta1(:); initialTheta2(:)];
 % Compute the error
 % Backward propagation
 % Repeat the above 3 steps 400 times until the error converges
-options = optimset('MaxIter', 400);
+options = optimset('MaxIter', 50);
 
 % Regularization
 lambda = 1;
 
 costFunction = @(p) nnCostFunction(p, inputLayerSize, hiddenLayerSize, outputLayerSize, X, y, lambda);
 
-[parameters, cost] = fmincg(costFunction, initialParameters, options);
+[parameters, J_history] = fmincg(costFunction, initialParameters, options);
 
 %save('-mat', 'parameters.mat', 'parameters');
+
+plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
+xlabel('Number of iterations');
+ylabel('Cost J');
+
+fprintf('\nProgram paused. Press enter to continue.\n');
+pause;
 
 Theta1 = reshape(parameters(1:hiddenLayerSize * (inputLayerSize + 1)), hiddenLayerSize, (inputLayerSize + 1));
 
